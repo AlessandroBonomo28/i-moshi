@@ -25,8 +25,8 @@ sorgenti audio (scegli tu) ──▶ pipeline dati (questo repo, GPU locale)
 Puoi supportare lo sviluppo su Ko-Fi [offrendo un caffè ☕](https://ko-fi.com/goodmann) 
 ### Modelli su huggingface
 
-- Primo modello trainato su 1400h con config_A: https://huggingface.co/goodman117/moshi-ita-A2
-- Secondo modello trainato su 2400h con configB (work in progress)
+- Primo modello trainato su 1400h con config_A2: https://huggingface.co/goodman117/moshi-ita-A2
+- Secondo modello trainato su 2400h con config_B (work in progress)
 ---
 
 ## 1. Il formato dati di Moshi (perché la pipeline è fatta così)
