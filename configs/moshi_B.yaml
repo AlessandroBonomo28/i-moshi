@@ -1,0 +1,49 @@
+# Config B — LoRA + EMBEDDING SBLOCCATI (ft_embed). La ricetta per l'adattamento
+# di lingua vero e proprio.
+# Profilo misurato (nostro smoke-test): ~54.5GB VRAM di picco (vs 37.9 della A),
+# ~10.5k words/s. Stessa durata/costo della A (~30h / ~$105 per 6300 step su H100).
+#
+# ⚠️ REGOLA CRITICA (imparata a caro prezzo): con `ft_embed: true` DEVE esserci
+# `save_adapters: false`. Motivo: gli embedding full-trained non viaggiano
+# correttamente dentro un file adapter LoRA — all'inferenza il server li ignora
+# e il modello crasha/balbetta. Con save_adapters:false il checkpoint è un
+# MODELLO COMPLETO FUSO (~15GB, LoRA+embedding merged nel base) da caricare con
+# `--moshi-weight` (NON `--lora-weight`). Non esiste nessun assert nel codice
+# che ti protegge dalla combinazione sbagliata: controlla a mano.
+
+data:
+  train_data: '/root/imoshi/data/train_clean.jsonl'
+  eval_data: '/root/imoshi/data/eval_clean.jsonl'
+  shuffle: true
+
+moshi_paths:
+  hf_repo_id: "kyutai/moshiko-pytorch-bf16"
+
+full_finetuning: false
+lora:
+  enable: true
+  rank: 128
+  scaling: 2.
+  ft_embed: true           # <-- differenza 1: sblocca gli embedding (lingua!)
+
+first_codebook_weight_multiplier: 100.
+text_padding_weight: .5
+
+duration_sec: 100
+batch_size: 16
+max_steps: 6300            # ~1.8-2 epoche su ~1550h; scala coi tuoi dati (vedi README)
+gradient_checkpointing: true
+optim:
+  lr: 2e-6
+  weight_decay: 0.1
+  pct_start: 0.05
+
+seed: 0
+log_freq: 10
+do_eval: false             # vedi README: l'eval è solo osservativo e nan-fragile
+do_ckpt: true
+ckpt_freq: 500
+
+save_adapters: false       # <-- differenza 2: OBBLIGATORIO con ft_embed (vedi sopra)
+num_ckpt_keep: 3           # checkpoint fusi da ~15GB: tenerne pochi (~45GB su disco)
+run_dir: "/root/imoshi/run_B"

@@ -1,0 +1,5 @@
+# Feed RSS di podcast — UN URL per riga. Righe con # = commenti.
+# Rinomina in podcast_rss.txt (o usa IMOSHI_RSS_SOURCES=iltuofile.txt).
+# Valgono gli stessi criteri di youtube_sources.example.txt: dialoghi a 2 voci.
+
+# https://example.com/feed.xml

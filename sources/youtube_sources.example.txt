@@ -1,0 +1,14 @@
+# Sorgenti YouTube — UN URL per riga (canale /videos, playlist o singolo video).
+# Righe che iniziano con # = commenti. Rinomina questo file in youtube_sources.txt
+# (o punta a un file diverso con IMOSHI_YT_SOURCES=iltuofile.txt).
+#
+# CRITERI DI SCELTA (imparati a caro prezzo, vedi README §Esperimenti):
+#   ✅ dialoghi 1-a-1 (host + ospite): resa altissima dopo i filtri
+#   ⚠️ 2 co-host paritari: ok ma il "main" oscilla tra le finestre (flip)
+#   ❌ 3+ voci fisse (panel/gruppo): la diarization a 2 speaker le MESCOLA nei
+#      canali — contaminazione invisibile ai filtri testuali. Evitare, o mettere
+#      in conto di scartare il 50-75% delle finestre col probe 3-voci (script 07).
+#   ❌ monologhi puri: scartati automaticamente dal filtro (tempo perso a scaricarli)
+
+# https://www.youtube.com/channel/CHANNEL_ID_1/videos
+# https://www.youtube.com/channel/CHANNEL_ID_2/videos

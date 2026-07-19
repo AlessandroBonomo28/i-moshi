@@ -1,0 +1,47 @@
+# Config A — LoRA "pura" (embedding CONGELATI).
+# La ricetta base di Kyutai per moshi-finetune su 1×H100 80GB.
+# Profilo misurato (nostro smoke-test): ~37.9GB VRAM di picco, ~17.4 s/step,
+# 6300 step ≈ 30h ≈ $105 su H100 DigitalOcean.
+#
+# ESITO STORICO (Run A2, vedi README §Esperimenti): accento/prosodia italiana ✅,
+# ma frasi senza senso ❌ e train_loss in PLATEAU da step 3000 → la capacità di
+# adattamento con embedding congelati SATURA. Usare la Config B per l'adattamento
+# di lingua vero; questa resta utile come baseline economica o per raffinamenti
+# leggeri (l'adapter LoRA salvato è piccolo, ~centinaia di MB).
+
+data:
+  train_data: '/root/imoshi/data/train_clean.jsonl'
+  eval_data: '/root/imoshi/data/eval_clean.jsonl'
+  shuffle: true
+
+moshi_paths:
+  hf_repo_id: "kyutai/moshiko-pytorch-bf16"
+
+full_finetuning: false
+lora:
+  enable: true
+  rank: 128
+  scaling: 2.
+  ft_embed: false          # embedding congelati (differenza chiave vs Config B)
+
+first_codebook_weight_multiplier: 100.
+text_padding_weight: .5
+
+duration_sec: 100
+batch_size: 16
+max_steps: 6300            # ~2 epoche su ~1400h; scala coi tuoi dati (vedi README)
+gradient_checkpointing: true
+optim:
+  lr: 2e-6
+  weight_decay: 0.1
+  pct_start: 0.05
+
+seed: 0
+log_freq: 10
+do_eval: false             # vedi README: l'eval è solo osservativo e nan-fragile
+do_ckpt: true
+ckpt_freq: 500
+
+save_adapters: true        # ok con ft_embed:false → salva solo l'adapter LoRA (leggero)
+num_ckpt_keep: 15          # adapter piccoli: tenerne tanti costa nulla
+run_dir: "/root/imoshi/run_A"

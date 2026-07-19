@@ -1,0 +1,20 @@
+# Dipendenze per la PIPELINE DATI in locale (GPU consumer consigliata).
+#
+#     pip install -r requirements-local.txt
+#
+# torch/torchaudio: installali PRIMA, con la build giusta per la tua GPU
+# (per RTX 5090/Blackwell serviva la nightly cu128; per GPU precedenti va
+# bene la release stabile: `pip install torch torchaudio`).
+#
+# ffmpeg NON è un pacchetto pip: installalo a parte e mettilo nel PATH
+# (Windows: winget install Gyan.FFmpeg / choco install ffmpeg).
+
+pyannote.audio>=3.1        # diarization (+ speaker embedding per gli script 07/08)
+faster-whisper             # trascrizione word-level (CTranslate2, ~23x realtime su GPU)
+yt-dlp                     # download da YouTube
+feedparser                 # parsing feed RSS dei podcast
+requests                   # download enclosure RSS
+soundfile                  # I/O wav
+numpy
+tqdm
+huggingface_hub
