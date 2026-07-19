@@ -7,9 +7,7 @@ validate su 1×H100 80GB. Con questi strumenti e ~1500h di parlato dialogico ita
 riproduci l'intero esperimento.
 
 
-Pipeline dati + script di training per adattare [Moshi](https://github.com/kyutai-labs/moshi)
-(il modello vocale full-duplex di Kyutai, `kyutai/moshiko-pytorch-bf16`, 7B) alla
-**lingua italiana**, nello spirito di [J-Moshi](https://arxiv.org/abs/2506.02979)
+[Moshi](https://github.com/kyutai-labs/moshi) è il modello vocale full-duplex di Kyutai, `kyutai/moshiko-pytorch-bf16`, 7B. I-Moshi è un tentativo di replicare quello che hanno fatto i giapponesi con [J-Moshi](https://arxiv.org/abs/2506.02979), ovvero il finetuning in italiano del modello
 (l'adattamento giapponese).
 ```
 sorgenti audio (scegli tu) ──▶ pipeline dati (questo repo, GPU locale)
