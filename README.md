@@ -1,6 +1,8 @@
 # Italian moshi
 Moshi è un IA con cui puoi parlare in tempo reale, senze le classiche pause tipiche delle conversazioni a turni con l'AI. La puoi eseguire in locale con una GPU con 24GB di vram.
 
+<img width="721" height="581" alt="222" src="https://github.com/user-attachments/assets/d9ebe90b-5175-455a-b6a6-dc1162927adc" />
+
 Questo repo contiene gli script per costruirti il dataset da
 solo, controllarne la qualità, e le config di training
 validate su 1×H100 80GB. Con questi strumenti e ~1500h di parlato dialogico italiano
