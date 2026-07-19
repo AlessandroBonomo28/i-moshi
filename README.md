@@ -1,17 +1,16 @@
-# i-moshi — Moshi che parla italiano
-
-Pipeline dati + script di training per adattare [Moshi](https://github.com/kyutai-labs/moshi)
-(il modello vocale full-duplex di Kyutai, `kyutai/moshiko-pytorch-bf16`, 7B) alla
-**lingua italiana**, nello spirito di [J-Moshi](https://arxiv.org/abs/2506.02979)
-(l'adattamento giapponese).
-
-Puoi supportare lo sviluppo su Ko-Fi [offrendo un caffè ☕](https://ko-fi.com/goodmann) 
+# Italian moshi
+Moshi è un IA con cui puoi parlare in tempo reale, senze le classiche pause tipiche delle conversazioni a turni con l'AI. La puoi eseguire in locale con una GPU con 24GB di vram.
 
 Questo repo contiene gli script per costruirti il dataset da
 solo, controllarne la qualità, e le config di training
 validate su 1×H100 80GB. Con questi strumenti e ~1500h di parlato dialogico italiano
 riproduci l'intero esperimento.
 
+
+Pipeline dati + script di training per adattare [Moshi](https://github.com/kyutai-labs/moshi)
+(il modello vocale full-duplex di Kyutai, `kyutai/moshiko-pytorch-bf16`, 7B) alla
+**lingua italiana**, nello spirito di [J-Moshi](https://arxiv.org/abs/2506.02979)
+(l'adattamento giapponese).
 ```
 sorgenti audio (scegli tu) ──▶ pipeline dati (questo repo, GPU locale)
                                       │  wav stereo 24k + json allineamenti
@@ -24,7 +23,7 @@ sorgenti audio (scegli tu) ──▶ pipeline dati (questo repo, GPU locale)
                                       ▼
                           inferenza locale (moshi.server)
 ```
-
+Puoi supportare lo sviluppo su Ko-Fi [offrendo un caffè ☕](https://ko-fi.com/goodmann) 
 ### Modelli su huggingface
 
 - Primo modello trainato su 1400h con config_A: https://huggingface.co/goodman117/moshi-ita-A2
